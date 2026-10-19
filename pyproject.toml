@@ -1,0 +1,40 @@
+[project]
+name = "lana-models"
+version = "0.0.0"
+description = "Recipes that turn models into the files Lana downloads"
+requires-python = ">=3.12,<3.13"
+license = "GPL-3.0-or-later"
+# Shared by every folder. onnxruntime is held to the 1.28 series because the
+# app runs sherpa-onnx 1.13.8's static onnxruntime 1.28.2: every export must
+# load and match there, so the checks run on the same series.
+dependencies = [
+    "numpy>=2.2",
+    "onnx>=1.20",
+    "onnxruntime==1.28.*",
+    "safetensors>=0.6",
+    "huggingface-hub>=1.0",
+    "soundfile>=0.13",
+]
+
+[project.optional-dependencies]
+# One extra per model family: `uv sync --extra <folder>`.
+mms = ["torch>=2.8", "transformers>=4.56"]
+mms-lid = ["torch>=2.8", "transformers>=4.56"]
+zipa = ["torch>=2.8", "torchaudio>=2.8"]
+ecapa-lid = ["torch>=2.8", "torchaudio>=2.8", "speechbrain>=1.0"]
+diarization = ["torch>=2.8", "torchaudio>=2.8"]
+qwen3 = ["torch>=2.8", "transformers>=4.56"]
+apple = ["coremltools>=8.0"]
+eval = []
+
+[tool.uv]
+package = false
+# torch from the CPU index on Linux and Windows; macOS wheels come from PyPI.
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[tool.uv.sources]
+torch = [{ index = "pytorch-cpu", marker = "sys_platform != 'darwin'" }]
+torchaudio = [{ index = "pytorch-cpu", marker = "sys_platform != 'darwin'" }]

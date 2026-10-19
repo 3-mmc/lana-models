@@ -1,0 +1,24 @@
+# Agent instructions and memory are machine-local (claude-memory)
+AGENTS.md
+.agent-memory
+
+.venv/
+__pycache__/
+*.pyc
+
+# Weights, exports and data never go into git: they live on Hugging Face
+# or in D:\Models. Keep small fixtures under tests/ if ever needed.
+*.onnx
+*.onnx.data
+*.bin
+*.safetensors
+*.pt
+*.ckpt
+*.npz
+*.mlmodelc/
+*.mlpackage/
+*.wav
+*.flac
+data/
+runs/
+out/

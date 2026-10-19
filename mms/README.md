@@ -2,7 +2,7 @@
 
 How the shared part of Lana's MMS support is made. The app downloads it once
 and builds each language from Meta's own `adapter.<lang>.safetensors`
-(`src-tauri/src/local/mms.rs`).
+(`src-tauri/src/local/mms.rs` in [3-mmc/lana](https://github.com/3-mmc/lana)).
 
 1. `export.py dar <dir>`: MMS-1b-all with the Dargwa adapter to fp32 ONNX,
    raw audio in, CTC logits out (the layout sherpa-onnx runs as Omnilingual).
